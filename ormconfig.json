@@ -5,7 +5,8 @@
   "username": "root",
   "password": "",
   "database": "together",
-  "migrations": ["src/migrations/*.ts"],
+  "migrations": ["src/database/migrations/*.ts"],
+  "entities": ["src/entity/*.ts"],
   "cli": {
     "migrationsDir": "src/database/migrations"
   }

@@ -1,5 +1,5 @@
 import { UserRepositories } from '../repositories/users.repository'
-
+import { getCustomRepository } from 'typeorm'
 interface UserRequest {
   name: string
   email: string
@@ -7,7 +7,7 @@ interface UserRequest {
 }
 class CreateUserService {
   async execute({ name, email, admin }: UserRequest) {
-    const userRepository = new UserRepositories()
+    const userRepository = getCustomRepository(UserRepositories)
     if (!email) {
       throw new Error('Email é  obrigatório')
     }
