@@ -9,13 +9,13 @@ interface UserRequest {
   admin?: boolean
 }
 class CreateUserService {
-  async execute({ name, email, admin, password }: UserRequest) {
+  async execute({ name, email, admin = false, password }: UserRequest) {
     const userRepository = getCustomRepository(UserRepositories)
     if (!email) {
       throw new Error('Email é  obrigatório')
     }
 
-    const userAlreadyExists = await userRepository.findOne({ name })
+    const userAlreadyExists = await userRepository.findOne({ email })
 
     if (userAlreadyExists) {
       throw new Error('Usuario já existe na api')
