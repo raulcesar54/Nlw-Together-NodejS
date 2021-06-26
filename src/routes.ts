@@ -7,6 +7,7 @@ import { ensureAuthenticate } from './middleware/ensureAuthenticated'
 import { CreateComplimentController } from './controllers/createCompliment.controller'
 import { ListUserReceiverController } from './controllers/listUserReceiveCompliments.controller'
 import { ListUserSenderComplimentController } from './controllers/listUserSenderCompliments.controller'
+import { ListUsersController } from './controllers/ListUsers.controller copy'
 const router = Router()
 
 const userController = new CreateUserController()
@@ -15,6 +16,7 @@ const authenticateUserController = new AuthenticateUserController()
 const complimentController = new CreateComplimentController()
 const listComplimentSenderController = new ListUserSenderComplimentController()
 const listComplimentReceiverController = new ListUserReceiverController()
+const listUsers = new ListUsersController()
 
 router.post('/user', userController.handle)
 router.post('/auth', authenticateUserController.handle)
@@ -35,5 +37,5 @@ router.get(
   ensureAuthenticate,
   listComplimentReceiverController.handle
 )
-
+router.get('/users', ensureAuthenticate, listUsers.handle)
 export { router }
